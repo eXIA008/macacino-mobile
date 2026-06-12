@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -172,64 +173,66 @@ class _SettingsScreenState extends State<SettingsScreen> {
               const SizedBox(height: 24),
             ],
 
-            // Testing Configuration Card
-            _buildSectionHeader('TESTING CONFIGURATION'),
-            Container(
-              padding: const EdgeInsets.all(20),
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(20),
-                border: Border.all(color: const Color(0xFFE2E8F0)),
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.black.withOpacity(0.01),
-                    blurRadius: 8,
-                    offset: const Offset(0, 4),
-                  ),
-                ],
-              ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  const Text(
-                    'Backend Base API URL',
-                    style: TextStyle(color: Color(0xFF0F172A), fontSize: 13, fontWeight: FontWeight.bold),
-                  ),
-                  const SizedBox(height: 10),
-                  TextField(
-                    controller: _urlController,
-                    style: const TextStyle(color: Color(0xFF0F172A), fontSize: 14),
-                    decoration: InputDecoration(
-                      filled: true,
-                      fillColor: const Color(0xFFF1F5F9),
-                      hintText: 'e.g. http://10.0.2.2:8000',
-                      hintStyle: const TextStyle(color: Color(0xFF78716C)),
-                      enabledBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(12),
-                        borderSide: const BorderSide(color: Color(0xFFE2E8F0)),
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(12),
-                        borderSide: const BorderSide(color: Color(0xFFB45309)),
+            // Testing Configuration Card (Hanya muncul di mode debug/development)
+            if (kDebugMode) ...[
+              _buildSectionHeader('TESTING CONFIGURATION'),
+              Container(
+                padding: const EdgeInsets.all(20),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(20),
+                  border: Border.all(color: const Color(0xFFE2E8F0)),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black.withOpacity(0.01),
+                      blurRadius: 8,
+                      offset: const Offset(0, 4),
+                    ),
+                  ],
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    const Text(
+                      'Backend Base API URL',
+                      style: TextStyle(color: Color(0xFF0F172A), fontSize: 13, fontWeight: FontWeight.bold),
+                    ),
+                    const SizedBox(height: 10),
+                    TextField(
+                      controller: _urlController,
+                      style: const TextStyle(color: Color(0xFF0F172A), fontSize: 14),
+                      decoration: InputDecoration(
+                        filled: true,
+                        fillColor: const Color(0xFFF1F5F9),
+                        hintText: 'e.g. http://10.0.2.2:8000',
+                        hintStyle: const TextStyle(color: Color(0xFF78716C)),
+                        enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(12),
+                          borderSide: const BorderSide(color: Color(0xFFE2E8F0)),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(12),
+                          borderSide: const BorderSide(color: Color(0xFFB45309)),
+                        ),
                       ),
                     ),
-                  ),
-                  const SizedBox(height: 14),
-                  ElevatedButton(
-                    onPressed: _saveApiUrl,
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color(0xFFB45309).withOpacity(0.12),
-                      foregroundColor: const Color(0xFFB45309),
-                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-                      padding: const EdgeInsets.symmetric(vertical: 13),
-                      elevation: 0,
+                    const SizedBox(height: 14),
+                    ElevatedButton(
+                      onPressed: _saveApiUrl,
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: const Color(0xFFB45309).withOpacity(0.12),
+                        foregroundColor: const Color(0xFFB45309),
+                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                        padding: const EdgeInsets.symmetric(vertical: 13),
+                        elevation: 0,
+                      ),
+                      child: const Text('Update Base URL', style: TextStyle(fontWeight: FontWeight.bold)),
                     ),
-                    child: const Text('Update Base URL', style: TextStyle(fontWeight: FontWeight.bold)),
-                  ),
-                ],
+                  ],
+                ),
               ),
-            ),
-            const SizedBox(height: 24),
+              const SizedBox(height: 24),
+            ],
 
             // Change Password Card
             _buildSectionHeader('ACCOUNT SECURITY'),

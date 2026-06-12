@@ -220,6 +220,15 @@ class DocumentProvider extends ChangeNotifier {
     notifyListeners();
 
     try {
+      try {
+        final testResp = await _apiService.get('${ApiConstants.baseUrl}/api/test-headers');
+        debugPrint('=== DIAGNOSTIC: TEST HEADERS RESPONSE ===');
+        debugPrint(testResp.toString());
+        debugPrint('========================================');
+      } catch (e) {
+        debugPrint('=== DIAGNOSTIC: TEST HEADERS ERROR: $e ===');
+      }
+
       final response = await _apiService.get(ApiConstants.documentsUrl);
       if (response != null && response['data'] != null) {
         final List<dynamic> list = response['data'];

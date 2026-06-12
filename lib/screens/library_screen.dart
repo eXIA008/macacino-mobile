@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:file_picker/file_picker.dart';
+import '../providers/auth_provider.dart';
 import '../providers/document_provider.dart';
 import 'reader_screen.dart';
 
@@ -22,8 +23,24 @@ class _LibraryScreenState extends State<LibraryScreen> {
   @override
   void initState() {
     super.initState();
-    Future.microtask(() {
-      Provider.of<DocumentProvider>(context, listen: false).fetchDocuments();
+    Future.microtask(() async {
+      final docProvider = Provider.of<DocumentProvider>(context, listen: false);
+      final authProvider = Provider.of<AuthProvider>(context, listen: false);
+      final messenger = ScaffoldMessenger.of(context);
+      try {
+        await docProvider.fetchDocuments();
+      } catch (e) {
+        if (e.toString().contains('Unauthorized') && mounted) {
+          authProvider.logout();
+          messenger.showSnackBar(
+            const SnackBar(
+              content: Text('Sesi telah berakhir. Silakan login kembali.'),
+              backgroundColor: Colors.redAccent,
+              behavior: SnackBarBehavior.floating,
+            ),
+          );
+        }
+      }
     });
   }
 
