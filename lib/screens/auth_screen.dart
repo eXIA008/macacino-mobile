@@ -79,9 +79,9 @@ class _AuthScreenState extends State<AuthScreen> {
                 begin: Alignment.topLeft,
                 end: Alignment.bottomRight,
                 colors: [
-                  Color(0xFF0F172A), // Slate 900
-                  Color(0xFF1E1B4B), // Indigo 950
-                  Color(0xFF0F172A), // Slate 900
+                  Color(0xFF0F172A), 
+                  Color(0xFF1E1B4B),
+                  Color(0xFF0F172A),
                 ],
               ),
             ),
@@ -133,7 +133,6 @@ class _AuthScreenState extends State<AuthScreen> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
-                    // Brand Logo / Header
                     Column(
                       children: [
                         Container(
@@ -175,7 +174,6 @@ class _AuthScreenState extends State<AuthScreen> {
                     ),
                     const SizedBox(height: 40),
 
-                    // Auth Card
                     Container(
                       padding: const EdgeInsets.all(24),
                       decoration: BoxDecoration(
@@ -208,7 +206,6 @@ class _AuthScreenState extends State<AuthScreen> {
                             ),
                             const SizedBox(height: 20),
 
-                            // Username field (only for Register)
                             if (!_isLogin) ...[
                               TextFormField(
                                 controller: _registerUsernameController,
@@ -252,7 +249,6 @@ class _AuthScreenState extends State<AuthScreen> {
                               const SizedBox(height: 16),
                             ],
 
-                            // Username / Email Field (only for Login)
                             if (_isLogin) ...[
                               TextFormField(
                                 controller: _loginUsernameController,
@@ -271,7 +267,6 @@ class _AuthScreenState extends State<AuthScreen> {
                               const SizedBox(height: 16),
                             ],
 
-                            // Password Field
                             TextFormField(
                               controller: _passwordController,
                               obscureText: true,
@@ -316,7 +311,6 @@ class _AuthScreenState extends State<AuthScreen> {
 
                             const SizedBox(height: 8),
 
-                            // Submit Button
                             ElevatedButton(
                               onPressed: authProvider.isLoading
                                   ? null
@@ -355,7 +349,6 @@ class _AuthScreenState extends State<AuthScreen> {
                     ),
                     const SizedBox(height: 24),
 
-                    // Toggle mode button
                     TextButton(
                       onPressed: () {
                         setState(() {

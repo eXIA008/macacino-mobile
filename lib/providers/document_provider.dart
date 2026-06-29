@@ -240,12 +240,10 @@ class DocumentProvider extends ChangeNotifier {
     }
   }
 
-  // Download raw document bytes
   Future<Uint8List> loadDocumentBytes(String url) async {
     return await _apiService.downloadFileBytes(url);
   }
 
-  // Upload a new document (web-compatible support)
   Future<void> uploadDocument({
     String? filePath,
     Uint8List? bytes,
@@ -269,7 +267,6 @@ class DocumentProvider extends ChangeNotifier {
     }
   }
 
-  // Delete a document
   Future<void> deleteDocument(int id) async {
     _isLoading = true;
     notifyListeners();
@@ -283,11 +280,9 @@ class DocumentProvider extends ChangeNotifier {
     }
   }
 
-  // Sync reading progress
   Future<void> updateProgress(int id, int page) async {
     try {
       await _apiService.put(ApiConstants.updateProgressUrl(id), {'page': page});
-      // Update local state without full reload
       final index = _documents.indexWhere((doc) => doc.id == id);
       if (index != -1) {
         final doc = _documents[index];
@@ -307,7 +302,6 @@ class DocumentProvider extends ChangeNotifier {
     }
   }
 
-  // Sync total pages
   Future<void> updateTotalPages(int id, int totalPages) async {
     try {
       await _apiService.put(ApiConstants.updateTotalPagesUrl(id), {
@@ -332,7 +326,6 @@ class DocumentProvider extends ChangeNotifier {
     }
   }
 
-  // Fetch highlights for a document
   Future<List<Highlight>> fetchHighlights(int docId, {int? page}) async {
     try {
       String url = ApiConstants.getHighlightsUrl(docId);
@@ -350,7 +343,6 @@ class DocumentProvider extends ChangeNotifier {
     return [];
   }
 
-  // Save an AI note highlight
   Future<Highlight> createAiNote({
     required int documentId,
     required int pageNumber,
@@ -358,7 +350,7 @@ class DocumentProvider extends ChangeNotifier {
     required String explanation,
     required String translation,
     required Map<String, dynamic> details,
-    String color = 'rgba(33, 150, 243, 0.3)', // Light blue
+    String color = 'rgba(33, 150, 243, 0.3)',
   }) async {
     final response = await _apiService.post(ApiConstants.createAiNoteUrl, {
       'document_id': documentId,
@@ -377,7 +369,6 @@ class DocumentProvider extends ChangeNotifier {
     }
   }
 
-  // Save standard highlight
   Future<Highlight> createHighlight({
     required int documentId,
     required int pageNumber,
@@ -386,7 +377,7 @@ class DocumentProvider extends ChangeNotifier {
     required double y,
     required double width,
     required double height,
-    String color = 'rgba(255, 213, 79, 0.3)', // Light yellow
+    String color = 'rgba(255, 213, 79, 0.3)',
   }) async {
     final response = await _apiService.post(ApiConstants.createHighlightUrl, {
       'document_id': documentId,
@@ -406,12 +397,10 @@ class DocumentProvider extends ChangeNotifier {
     }
   }
 
-  // Delete a highlight
   Future<void> deleteHighlight(int id) async {
     await _apiService.delete(ApiConstants.deleteHighlightUrl(id));
   }
 
-  // Fetch statistics
   Future<void> fetchStats() async {
     try {
       final response = await _apiService.get(ApiConstants.statsUrl);
@@ -424,7 +413,6 @@ class DocumentProvider extends ChangeNotifier {
     }
   }
 
-  // Call AI explain API
   Future<Map<String, dynamic>> explainText(
     String text,
     String contextText,
@@ -441,7 +429,6 @@ class DocumentProvider extends ChangeNotifier {
     }
   }
 
-  // Fetch and play TTS audio
   Future<void> speak(String text, String accent) async {
     if (_isSpeaking) {
       await _audioPlayer.stop();

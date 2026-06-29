@@ -39,15 +39,14 @@ class _ReaderScreenState extends State<ReaderScreen> {
 
   final TextEditingController _pageInputController = TextEditingController();
 
-  // Highlight color cycling
   int _colorIndex = 0;
   final List<String> _neonColorStrings = [
-    'rgba(255, 255, 0, 0.7)', // Yellow
-    'rgba(0, 255, 0, 0.5)', // Green
-    'rgba(0, 255, 255, 0.6)', // Cyan
-    'rgba(255, 0, 255, 0.5)', // Magenta
-    'rgba(255, 153, 0, 0.7)', // Orange
-    'rgba(186, 85, 211, 0.6)', // Orchid
+    'rgba(255, 255, 0, 0.7)', 
+    'rgba(0, 255, 0, 0.5)', 
+    'rgba(0, 255, 255, 0.6)', 
+    'rgba(255, 0, 255, 0.5)', 
+    'rgba(255, 153, 0, 0.7)', 
+    'rgba(186, 85, 211, 0.6)',
   ];
 
   String? _tempHighlightText;
@@ -968,7 +967,6 @@ class _ReaderScreenState extends State<ReaderScreen> {
                   ),
                 ),
 
-                // Bottom Floating Toolbar for AI
                 if (_showFloatingToolbar && _selectedText != null)
                   Positioned(
                     bottom: 24,
@@ -1394,7 +1392,6 @@ class _AiExplanationSheetState extends State<AiExplanationSheet> {
                             ),
                             const SizedBox(height: 16),
 
-                            // English Explanation Card
                             Container(
                               padding: const EdgeInsets.all(16),
                               decoration: BoxDecoration(
@@ -1440,7 +1437,6 @@ class _AiExplanationSheetState extends State<AiExplanationSheet> {
                             ),
                             const SizedBox(height: 16),
 
-                            // Unlock Gate Section
                             if (!_isUnlocked)
                               Container(
                                 margin: const EdgeInsets.only(bottom: 16),
@@ -1523,7 +1519,6 @@ class _AiExplanationSheetState extends State<AiExplanationSheet> {
                                 ),
                               ),
 
-                            // Locked Section (Faded when locked)
                             IgnorePointer(
                               ignoring: !_isUnlocked,
                               child: Opacity(
@@ -1532,14 +1527,12 @@ class _AiExplanationSheetState extends State<AiExplanationSheet> {
                                   crossAxisAlignment:
                                       CrossAxisAlignment.stretch,
                                   children: [
-                                    // Indonesian Translation Card
                                     _buildInfoCard(
                                       '🇮🇩 INDONESIAN TRANSLATION',
                                       _translation,
                                       isAccent: true,
                                     ),
 
-                                    // YouGlish Button
                                     Container(
                                       margin: const EdgeInsets.only(bottom: 18),
                                       child: ElevatedButton.icon(
@@ -1571,14 +1564,12 @@ class _AiExplanationSheetState extends State<AiExplanationSheet> {
                                       ),
                                     ),
 
-                                    // Grammar Context
                                     if (_grammar.isNotEmpty)
                                       _buildInfoCard(
                                         '⚙️ GRAMMAR CONTEXT',
                                         _grammar,
                                       ),
 
-                                    // Common Collocations
                                     if (_collocations.isNotEmpty) ...[
                                       _buildHeader('🔗 COMMON COLLOCATIONS'),
                                       Container(
@@ -1638,7 +1629,6 @@ class _AiExplanationSheetState extends State<AiExplanationSheet> {
                                       ),
                                     ],
 
-                                    // Nuance
                                     if (_nuance.isNotEmpty &&
                                         _nuance.toLowerCase() !=
                                             'konteks umum' &&
@@ -1649,7 +1639,6 @@ class _AiExplanationSheetState extends State<AiExplanationSheet> {
                                         _nuance,
                                       ),
 
-                                    // Tense Info
                                     if (_tenseInfo.isNotEmpty &&
                                         !_tenseInfo.toLowerCase().contains(
                                           'bukan kata kerja',
@@ -1661,7 +1650,6 @@ class _AiExplanationSheetState extends State<AiExplanationSheet> {
                                         _tenseInfo,
                                       ),
 
-                                    // Idioms
                                     if (_idiomNote.isNotEmpty &&
                                         !_idiomNote.toLowerCase().contains(
                                           'bukan merupakan ungkapan',
@@ -1671,7 +1659,6 @@ class _AiExplanationSheetState extends State<AiExplanationSheet> {
                                         _idiomNote,
                                       ),
 
-                                    // Pro Tip
                                     if (_tip.isNotEmpty &&
                                         _tip.toLowerCase() !=
                                             'tidak ada tips tambahan')
@@ -1690,7 +1677,6 @@ class _AiExplanationSheetState extends State<AiExplanationSheet> {
                       ),
               ),
 
-              // Bottom Save / Delete Action Button
               if (!_isLoading && _error == null)
                 Padding(
                   padding: const EdgeInsets.symmetric(vertical: 16),

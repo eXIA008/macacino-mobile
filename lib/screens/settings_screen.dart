@@ -113,7 +113,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            // User profile card
             if (user != null) ...[
               Container(
                 padding: const EdgeInsets.all(20),
@@ -173,7 +172,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
               const SizedBox(height: 24),
             ],
 
-            // Testing Configuration Card (Hanya muncul di mode debug/development)
             if (kDebugMode) ...[
               _buildSectionHeader('TESTING CONFIGURATION'),
               Container(
@@ -234,7 +232,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
               const SizedBox(height: 24),
             ],
 
-            // Change Password Card
             _buildSectionHeader('ACCOUNT SECURITY'),
             Container(
               padding: const EdgeInsets.all(20),
@@ -317,7 +314,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
             ),
             const SizedBox(height: 32),
 
-            // Logout Button
             ElevatedButton.icon(
               onPressed: authProvider.isLoading ? null : authProvider.logout,
               icon: const Icon(Icons.logout, size: 18),

@@ -20,13 +20,11 @@ class ApiService {
         if (_token != null) 'Authorization': 'Bearer $_token',
       };
 
-  // Helper for GET requests
   Future<dynamic> get(String url) async {
     final response = await http.get(Uri.parse(url), headers: _headers);
     return _handleResponse(response);
   }
 
-  // Helper for POST requests
   Future<dynamic> post(String url, Map<String, dynamic> body) async {
     final response = await http.post(
       Uri.parse(url),
@@ -36,7 +34,6 @@ class ApiService {
     return _handleResponse(response);
   }
 
-  // Helper for PUT requests
   Future<dynamic> put(String url, Map<String, dynamic> body) async {
     final response = await http.put(
       Uri.parse(url),
@@ -46,13 +43,11 @@ class ApiService {
     return _handleResponse(response);
   }
 
-  // Helper for DELETE requests
   Future<dynamic> delete(String url) async {
     final response = await http.delete(Uri.parse(url), headers: _headers);
     return _handleResponse(response);
   }
 
-  // Download raw file bytes (e.g., PDF)
   Future<Uint8List> downloadFileBytes(String url) async {
     final response = await http.get(Uri.parse(url), headers: _headers);
     if (response.statusCode >= 200 && response.statusCode < 300) {
@@ -62,7 +57,6 @@ class ApiService {
     }
   }
 
-  // Upload PDF file (web-compatible support)
   Future<dynamic> uploadDocument({
     String? filePath,
     Uint8List? bytes,
@@ -71,16 +65,13 @@ class ApiService {
   }) async {
     final request = http.MultipartRequest('POST', Uri.parse(ApiConstants.uploadDocumentUrl));
     
-    // Add auth headers
     if (_token != null) {
       request.headers['Authorization'] = 'Bearer $_token';
     }
     request.headers['Accept'] = 'application/json';
 
-    // Add field
     request.fields['title'] = title;
 
-    // Add file
     if (kIsWeb) {
       if (bytes == null) {
         throw Exception("File bytes are required on Web platform");
@@ -110,7 +101,6 @@ class ApiService {
     return _handleResponse(response);
   }
 
-  // Fetch TTS audio and return the local file path
   Future<String> fetchTtsAudio(String text, String accent) async {
     if (kIsWeb) {
       final response = await http.post(
@@ -128,7 +118,6 @@ class ApiService {
       }
     }
 
-    // 1. Clean up old tts files first (older than 1 minute)
     try {
       final tempDir = await getTemporaryDirectory();
       final files = tempDir.listSync();
@@ -166,7 +155,6 @@ class ApiService {
     }
   }
 
-  // Handle http responses and parse errors
   dynamic _handleResponse(http.Response response) {
     final int statusCode = response.statusCode;
     

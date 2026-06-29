@@ -62,7 +62,6 @@ class _LibraryScreenState extends State<LibraryScreen> {
       text: fileName.replaceAll('.pdf', ''),
     );
 
-    // Show naming dialog
     if (!mounted) return;
     showDialog(
       context: context,
@@ -125,7 +124,6 @@ class _LibraryScreenState extends State<LibraryScreen> {
   }) async {
     final docProvider = Provider.of<DocumentProvider>(context, listen: false);
 
-    // Show uploading overlay loading
     showDialog(
       context: context,
       barrierDismissible: false,
@@ -171,7 +169,7 @@ class _LibraryScreenState extends State<LibraryScreen> {
         );
       }
     } finally {
-      if (mounted) Navigator.of(context).pop(); // Dismiss loading dialog
+      if (mounted) Navigator.of(context).pop();
     }
   }
 
@@ -258,7 +256,6 @@ class _LibraryScreenState extends State<LibraryScreen> {
             onPressed: () async {
               Navigator.of(ctx).pop();
 
-              // Bulk delete sequentially
               final idsToDelete = List<int>.from(_selectedIds);
               setState(() {
                 _isLoadingLocal = true;
@@ -339,7 +336,6 @@ class _LibraryScreenState extends State<LibraryScreen> {
               color: const Color(0xFFB45309),
               child: Column(
                 children: [
-                  // Search Bar
                   Padding(
                     padding: const EdgeInsets.symmetric(
                       horizontal: 16,
@@ -377,7 +373,6 @@ class _LibraryScreenState extends State<LibraryScreen> {
                     ),
                   ),
 
-                  // Document Grid Shelf
                   Expanded(
                     child: documents.isEmpty
                         ? _buildEmptyState()
@@ -499,7 +494,6 @@ class _LibraryScreenState extends State<LibraryScreen> {
           Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              // Book Cover Card Placeholder
               Expanded(
                 child: Container(
                   color: const Color(0xFFF1F5F9),
@@ -529,7 +523,6 @@ class _LibraryScreenState extends State<LibraryScreen> {
                         ),
                       ),
 
-                      // Book Cover Design Elements
                       Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
@@ -556,7 +549,6 @@ class _LibraryScreenState extends State<LibraryScreen> {
                         ],
                       ),
 
-                      // Completion Overlay
                       if (progress >= 1.0)
                         Positioned(
                           right: 10,
@@ -579,7 +571,6 @@ class _LibraryScreenState extends State<LibraryScreen> {
                 ),
               ),
 
-              // Progress & Book metadata info
               Padding(
                 padding: const EdgeInsets.all(12.0),
                 child: Column(
@@ -605,7 +596,6 @@ class _LibraryScreenState extends State<LibraryScreen> {
                     ),
                     const SizedBox(height: 10),
 
-                    // Linear Progress Bar
                     ClipRRect(
                       borderRadius: BorderRadius.circular(4),
                       child: LinearProgressIndicator(
@@ -646,7 +636,6 @@ class _LibraryScreenState extends State<LibraryScreen> {
             ],
           ),
 
-          // Selection checkmark
           if (_isSelectionMode)
             Positioned(
               top: 10,

@@ -1,10 +1,9 @@
 import 'package:flutter/foundation.dart';
 
 class ApiConstants {
-  // Use http://10.0.2.2:8000 for Android Emulator.
-  // Use http://localhost:8000 for iOS Simulator/Desktop.
-  // Switch to your PC's local IP address (e.g. 192.168.1.X) if running on physical devices.
-  static const String prodUrl = 'https://macacino.vercel.app';
+
+//static const String prodUrl = 'https://macacino.vercel.app';
+  static const String prodUrl = 'http://192.168.18.188:8000';
   static const String devUrl = 'http://192.168.18.188:8000';
 
   static String baseUrl = kReleaseMode ? prodUrl : devUrl;

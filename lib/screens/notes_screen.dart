@@ -28,12 +28,10 @@ class _NotesScreenState extends State<NotesScreen> {
     final docProvider = Provider.of<DocumentProvider>(context, listen: false);
     
     try {
-      // 1. Fetch library documents
       await docProvider.fetchDocuments();
       
       final Map<BookDocument, List<Highlight>> tempGroup = {};
       
-      // 2. Fetch highlights for each document
       for (final doc in docProvider.documents) {
         final highlights = await docProvider.fetchHighlights(doc.id);
         if (highlights.isNotEmpty) {
@@ -57,12 +55,10 @@ class _NotesScreenState extends State<NotesScreen> {
     final docProvider = Provider.of<DocumentProvider>(context, listen: false);
     try {
       await docProvider.deleteHighlight(id);
-      // Remove locally to avoid full page refresh
       setState(() {
         for (final doc in _groupedNotes.keys) {
           _groupedNotes[doc]!.removeWhere((hl) => hl.id == id);
         }
-        // Remove empty book groups
         _groupedNotes.removeWhere((doc, list) => list.isEmpty);
       });
     } catch (e) {
@@ -171,7 +167,6 @@ class _NotesScreenState extends State<NotesScreen> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          // Header Book title
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
             color: const Color(0xFFF1F5F9),
@@ -206,7 +201,6 @@ class _NotesScreenState extends State<NotesScreen> {
             ),
           ),
           
-          // Highlights List
           ListView.builder(
             shrinkWrap: true,
             physics: const NeverScrollableScrollPhysics(),

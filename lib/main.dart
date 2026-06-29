@@ -10,7 +10,6 @@ import 'screens/main_shell.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  // Load dynamic testing URL if previously configured in settings
   final prefs = await SharedPreferences.getInstance();
   final savedUrl = prefs.getString('api_base_url');
   if (savedUrl != null && savedUrl.isNotEmpty) {
@@ -68,7 +67,6 @@ class AuthRouteShell extends StatelessWidget {
   Widget build(BuildContext context) {
     final authProvider = Provider.of<AuthProvider>(context);
 
-    // Switch between Auth Screen and Library main shell depending on login state
     if (authProvider.isAuthenticated) {
       return const MainShell();
     } else {

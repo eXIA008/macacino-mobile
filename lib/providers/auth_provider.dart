@@ -48,7 +48,6 @@ class AuthProvider extends ChangeNotifier {
     _loadStoredAuth();
   }
 
-  // Load active token & user details from storage
   Future<void> _loadStoredAuth() async {
     final prefs = await SharedPreferences.getInstance();
     final token = prefs.getString('auth_token');
@@ -62,7 +61,6 @@ class AuthProvider extends ChangeNotifier {
     }
   }
 
-  // Login action
   Future<void> login(String username, String password) async {
     _isLoading = true;
     notifyListeners();
@@ -79,7 +77,6 @@ class AuthProvider extends ChangeNotifier {
         _user = User.fromJson(response['user']);
         _apiService = ApiService(_token);
 
-        // Persist local storage
         final prefs = await SharedPreferences.getInstance();
         await prefs.setString('auth_token', _token!);
         await prefs.setString('auth_user', json.encode(_user!.toJson()));
@@ -92,7 +89,6 @@ class AuthProvider extends ChangeNotifier {
     }
   }
 
-  // Register action
   Future<void> register(String username, String email, String password, String passwordConfirmation) async {
     _isLoading = true;
     notifyListeners();
@@ -111,7 +107,6 @@ class AuthProvider extends ChangeNotifier {
         _user = User.fromJson(response['user']);
         _apiService = ApiService(_token);
 
-        // Persist local storage
         final prefs = await SharedPreferences.getInstance();
         await prefs.setString('auth_token', _token!);
         await prefs.setString('auth_user', json.encode(_user!.toJson()));
@@ -124,7 +119,6 @@ class AuthProvider extends ChangeNotifier {
     }
   }
 
-  // Logout action
   Future<void> logout() async {
     _isLoading = true;
     notifyListeners();
@@ -134,7 +128,7 @@ class AuthProvider extends ChangeNotifier {
         await apiService.post(ApiConstants.logoutUrl, {});
       }
     } catch (e) {
-      // Allow logout even if API call fails (network issues, etc.)
+      // Allow logout even if API call fails 
     } finally {
       _token = null;
       _user = null;

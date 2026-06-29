@@ -47,7 +47,6 @@ class _StatsScreenState extends State<StatsScreen> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
-                    // Stats Highlights Header Cards
                     Row(
                       children: [
                         Expanded(
@@ -78,7 +77,6 @@ class _StatsScreenState extends State<StatsScreen> {
                     ),
                     const SizedBox(height: 28),
 
-                    // Book Progress List
                     Text(
                       'Book Reading Progress',
                       style: GoogleFonts.outfit(
@@ -94,7 +92,6 @@ class _StatsScreenState extends State<StatsScreen> {
                     
                     const SizedBox(height: 28),
 
-                    // Vocabulary statistics categorization
                     Text(
                       'Vocabulary Distribution',
                       style: GoogleFonts.outfit(
